@@ -12,15 +12,20 @@ public class MoodAnyalyezer {
 		this.message = message;
 	}
 
-	public String analysisMood() {
+	public String analysisMood() throws MoodAnaylyezerException {
 		try {
+			if (message.length() == 0) {
+				throw new  MoodAnaylyezerException( MoodAnaylyezerException.ExceptionType.EMPTY_MESSAGE,
+						"Mood should not be empty");
+			}
 			if (message.contains("Sad") || message.contains("SAD")) {
 				return "SAD";
 			} else {
 				return "HAPPY";
 			}
 		} catch (NullPointerException e) {
-			return "HAPPY";
+			throw new  MoodAnaylyezerException( MoodAnaylyezerException.ExceptionType.NULL_MESSAGE,
+					"Mood should not be null");
+		}
 }
-	}
 }
